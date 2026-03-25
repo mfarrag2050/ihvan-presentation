@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dini Radikal Düşüncenin İlk Teşekkülü (1954–1967)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #2C8C6C;
+            --gold-light: #4AAE8A;
+            --gold-dim: #1E6B4D;
+            --crimson: #A02020;
+            --crimson-light: #D03030;
+            --teal: #C49A3C;
+            --teal-dim: #8B6F2A;
+            --navy: #0B1A16;
+            --navy-light: #142E24;
+            --charcoal: #121F1A;
+            --slate: #2D4A3A;
+            --text-primary: #F0F0E6;
+            --text-secondary: #9CA8A0;
+            --text-dim: #6B7A6F;
+            --bg-dark: #080E0C;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(44, 140, 108, 0.2);
+            --border-light: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ═══════════════════════════════════════
+           TYPOGRAPHY
+        ═══════════════════════════════════════ */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2.8rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.8rem;
+            line-height: 1.3;
+        }
+        h3 {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+        }
+        p, li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        /* ═══════════════════════════════════════
+           SLIDE SYSTEM
+        ═══════════════════════════════════════ */
+        .presentation {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            pointer-events: none;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+        .slide.prev {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+
+        .slide-inner {
+            width: 100%;
+            max-width: 1200px;
+            padding: 60px 50px;
+            position: relative;
+        }
+
+        /* ═══════════════════════════════════════
+           NAVIGATION
+        ═══════════════════════════════════════ */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0; right: 0;
+            height: 56px;
+            background: rgba(8, 12, 20, 0.92);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 1000;
+        }
+        .nav-info {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-title {
+            color: var(--text-secondary);
+            font-weight: 500;
+            max-width: 400px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-btn {
+            width: 40px; height: 40px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.04);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+        }
+        .nav-btn:hover {
+            background: rgba(212, 168, 67, 0.15);
+            border-color: var(--gold-dim);
+            color: var(--gold-light);
+        }
+        .slide-counter {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transition: width 0.4s ease;
+            z-index: 1001;
+        }
+
+        /* ═══════════════════════════════════════
+           COMPONENTS
+        ═══════════════════════════════════════ */
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 20px;
+            background: rgba(212, 168, 67, 0.1);
+            border: 1px solid rgba(212, 168, 67, 0.25);
+            color: var(--gold-light);
+        }
+        .section-badge.red {
+            background: rgba(160, 32, 32, 0.15);
+            border-color: rgba(160, 32, 32, 0.3);
+            color: var(--crimson-light);
+        }
+        .section-badge.teal {
+            background: rgba(42, 157, 143, 0.12);
+            border-color: rgba(42, 157, 143, 0.25);
+            color: var(--teal);
+        }
+
+        .content-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+        .content-card:hover {
+            border-color: var(--border);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .content-card h3 {
+            margin-bottom: 10px;
+            color: var(--gold-light);
+        }
+
+        .quote-block {
+            border-left: 3px solid var(--gold);
+            padding: 16px 20px;
+            margin: 20px 0;
+            background: rgba(212, 168, 67, 0.05);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+        }
+        .quote-block p {
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        .quote-source {
+            font-size: 0.8rem;
+            color: var(--gold-dim);
+            margin-top: 8px;
+            font-style: normal;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .slide-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin: 20px 0;
+            border: 1px solid var(--border-light);
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .comparison-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 28px;
+            height: 100%;
+        }
+        .comparison-card.gold {
+            border-color: rgba(212, 168, 67, 0.25);
+            border-top: 3px solid var(--gold);
+        }
+        .comparison-card.red {
+            border-color: rgba(160, 32, 32, 0.25);
+            border-top: 3px solid var(--crimson);
+        }
+
+        /* ═══════════════════════════════════════
+           TIMELINE SVG COMPONENT
+        ═══════════════════════════════════════ */
+        .timeline-horizontal {
+            position: relative;
+            margin: 30px 0;
+            padding: 20px 0;
+        }
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent);
+        }
+        .timeline-nodes {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        .timeline-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+        .timeline-dot {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 3px solid var(--bg-dark);
+            box-shadow: 0 0 12px rgba(212, 168, 67, 0.4);
+            z-index: 2;
+        }
+        .timeline-dot.red {
+            background: var(--crimson);
+            box-shadow: 0 0 12px rgba(160, 32, 32, 0.5);
+        }
+        .timeline-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+        .timeline-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 120px;
+        }
+
+        /* ═══════════════════════════════════════
+           COVER SLIDE
+        ═══════════════════════════════════════ */
+        .cover-slide {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100vh;
+        }
+        .cover-slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('./cover-egypt-political.png') center/cover no-repeat;
+            opacity: 0.25;
+            filter: blur(2px);
+        }
+        .cover-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(8,12,20,0.6) 0%, rgba(8,12,20,0.85) 50%, rgba(8,12,20,0.95) 100%);
+        }
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+        .cover-content h1 {
+            font-size: 3.2rem;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #5CB88A, #2C8C6C, #1E6B4D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .cover-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        .cover-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 24px auto;
+        }
+
+        /* ═══════════════════════════════════════
+           SVG ANIMATIONS
+        ═══════════════════════════════════════ */
+        @keyframes pulse-gold {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+        @keyframes float-up {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-20px); opacity: 0; }
+        }
+        @keyframes draw-line {
+            0% { stroke-dashoffset: 400; }
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes fade-in-up {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes crack-spread {
+            0% { transform: scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        .animate-on-active {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .slide.active .animate-on-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .slide.active .delay-1 { transition-delay: 0.1s; }
+        .slide.active .delay-2 { transition-delay: 0.2s; }
+        .slide.active .delay-3 { transition-delay: 0.3s; }
+        .slide.active .delay-4 { transition-delay: 0.4s; }
+        .slide.active .delay-5 { transition-delay: 0.5s; }
+        .slide.active .delay-6 { transition-delay: 0.6s; }
+        .slide.active .delay-7 { transition-delay: 0.7s; }
+
+        /* Islamic geometric pattern */
+        .islamic-pattern {
+            position: absolute;
+            top: 0; right: 0;
+            width: 300px; height: 300px;
+            opacity: 0.06;
+            pointer-events: none;
+        }
+
+        /* Expandable cards */
+        .expandable-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 16px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+        .expandable-header:hover {
+            border-color: var(--border);
+            background: rgba(255,255,255,0.05);
+        }
+        .expandable-header h3 { margin: 0; font-size: 1rem; }
+        .expand-icon {
+            width: 20px; height: 20px;
+            transition: transform 0.3s;
+            color: var(--text-dim);
+        }
+        .expandable-header.open .expand-icon {
+            transform: rotate(180deg);
+        }
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            padding: 0 20px;
+        }
+        .expandable-content.open {
+            max-height: 600px;
+            padding: 12px 20px 20px;
+        }
+        .expandable-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .expandable-content li {
+            padding: 6px 0;
+            padding-left: 16px;
+            position: relative;
+            font-size: 0.88rem;
+        }
+        .expandable-content li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--gold-dim);
+            font-size: 0.5rem;
+            top: 10px;
+        }
+
+        /* Cause triangle SVG */
+        .cause-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+        .cause-number {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .cause-number.c1 {
+            background: rgba(212, 168, 67, 0.2);
+            color: var(--gold-light);
+        }
+        .cause-number.c2 {
+            background: rgba(160, 32, 32, 0.2);
+            color: var(--crimson-light);
+        }
+        .cause-number.c3 {
+            background: rgba(42, 157, 143, 0.2);
+            color: var(--teal);
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .two-col { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+            .cover-content h1 { font-size: 2.4rem; }
+            .slide-inner { padding: 40px 24px; }
+            .stat-number { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="presentation" id="presentation">
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 1: COVER
+    ══════════════════════════════════════════════════ -->
+    <div class="slide active" data-title="Kapak">
+        <div class="cover-slide">
+            <div class="cover-content">
+                <div class="animate-on-active delay-1">
+                    <div class="cover-meta" style="margin-bottom: 30px;">
+                        <span>📖 Sunum</span>
+                    </div>
+                </div>
+                <h1 class="animate-on-active delay-2">Dini Radikal Düşüncenin<br>İlk Teşekkülü</h1>
+                <div class="cover-divider animate-on-active delay-3"></div>
+                <p class="cover-subtitle animate-on-active delay-3">1954 – 1967</p>
+                <p class="animate-on-active delay-4" style="color: var(--text-dim); font-size: 0.9rem;">
+                    Mısır'da İhvan-ı Müslimin'in Dönüşümü ve Radikalizmin Kökenleri
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 2: MISIR — KARMAŞIK BİR ZEMİN
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="Mısır: Karmaşık Bir Zemin">
+        <div class="slide-inner">
+            <!-- Islamic pattern decoration -->
+            <svg class="islamic-pattern" viewBox="0 0 200 200" fill="none">
+                <pattern id="islamic1" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M20 0L40 20L20 40L0 20Z" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.6"/>
+                    <circle cx="20" cy="20" r="5" stroke="currentColor" stroke-width="0.3" fill="none" opacity="0.4"/>
+                </pattern>
+                <rect width="200" height="200" fill="url(#islamic1)" color="var(--gold)"/>
+            </svg>
+
+            <span class="section-badge animate-on-active delay-1">🌍 Tarihsel Zemin</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 16px;">Mısır: Karmaşık Bir Siyasi<br>ve Toplumsal Zemin</h1>
+            <p class="animate-on-active delay-3" style="max-width: 700px; margin-bottom: 30px;">
+                Mısır, Ortadoğu'nun en çok bilinen ama bir o kadar da bilinmeyen ülkelerinden biri. 
+                Karmaşık iç ve dış politikası olan, hayatın içinde siyasetin açıkça konuşulmadığı, 
+                ama İslami hareketlere en fazla ev sahipliği yapan ülke.
+            </p>
+
+            <div class="two-col animate-on-active delay-4">
+                <div>
+                    <img src="./egypt-complex-landscape.png" alt="Mısır" class="slide-image" style="margin-top: 0;">
+                </div>
+                <div>
+                    <div class="content-card" style="text-align: center; padding: 30px;">
+                        <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 20px;">
+                            <div>
+                                <div class="stat-number">29</div>
+                                <p style="font-size: 0.8rem;">Emniyet kayıtlarında<br>bağımsız grup</p>
+                            </div>
+                            <div style="font-size: 2rem; color: var(--text-dim); align-self: center;">~</div>
+                            <div>
+                                <div class="stat-number">60+</div>
+                                <p style="font-size: 0.8rem;">Diğer kaynaklarda<br>İslami hareket</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>Bu tablonun oluşmasında Mısır'ın inişli çıkışlı tarihi, büyük nüfusu ve moderniteyle tanışma biçimi belirleyici rol oynamış olabilir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 3: İHVAN'IN KURULUŞU
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="İhvan'ın Kuruluşu ve Yükselişi">
+        <div class="slide-inner">
+            <span class="section-badge animate-on-active delay-1">🏛️ Kuruluş</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 12px;">İhvan-ı Müslimin'in<br>Kuruluşu ve Yükselişi</h1>
+            <p class="animate-on-active delay-3" style="max-width: 700px; margin-bottom: 24px;">
+                Ortadoğu'nun en büyük, en köklü ve en prestijli İslami hareketi. 
+                Suriye, Lübnan ve Filistin'deki grupların çoğu Mısır İhvanı'ndan doğmuştur.
+            </p>
+
+            <img src="./benna-founding-silhouette.png" alt="İhvan Kuruluşu" class="slide-image animate-on-active delay-3" style="max-height: 220px;">
+
+            <!-- Timeline -->
+            <div class="timeline-horizontal animate-on-active delay-4">
+                <div class="timeline-line"></div>
+                <div class="timeline-nodes">
+                    <div class="timeline-node">
+                        <div class="timeline-year">1928</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Resmi kuruluş<br>Hasan el-Benna</div>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="timeline-year">1932</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Genel merkez<br>Kahire'ye taşınır</div>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="timeline-year">1936</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Balfour Deklarasyonu<br>protestosu</div>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="timeline-year">1949</div>
+                        <div class="timeline-dot red"></div>
+                        <div class="timeline-label" style="color: var(--crimson-light);">Benna suikastle<br>öldürülür</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-block animate-on-active delay-5">
+                <p>"İslam bir hayat düzenidir ve bu anlamda savunulmalıdır."</p>
+                <div class="quote-source">— Hasan el-Benna'nın temel mesajı</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 4: BENNA'NIN MİRASI
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="Benna'nın Mirası ve Suikast">
+        <div class="slide-inner">
+            <span class="section-badge red animate-on-active delay-1">⚔️ İlk Darbe</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 16px;">Benna'nın Mirası ve Suikast</h1>
+
+            <div class="two-col">
+                <div class="animate-on-active delay-3">
+                    <p style="margin-bottom: 16px;">
+                        Erkilet Hoca'nın ifadesiyle İhvan'ın bir <strong style="color: var(--gold-light);">gençlik kulübünden siyasal bir örgüte</strong> dönüşmesi zaman içinde gerçekleşmiştir.
+                    </p>
+                    <p style="margin-bottom: 16px;">
+                        Bu dönüşüm sürecinde, Benna'nın ve hareketin ülkedeki konumu giderek daha fazla rahatsızlık yaratmaya başlar. Dönemin Paşası hareketi yasaklar; tüm İhvan yöneticileri tutuklanırken <strong style="color: var(--gold-light);">yalnızca Benna serbest bırakılır.</strong>
+                    </p>
+
+                    <div class="content-card" style="border-left: 3px solid var(--crimson);">
+                        <h3 style="color: var(--crimson-light);">1949 — Suikast</h3>
+                        <p>Henüz 43 yaşındayken Benna suikastle öldürülür. Tilmisani'ye göre yedi kurşunla ağır yaralanan Benna'ya hastanede doktorlar müdahale etmemiştir.</p>
+                    </div>
+                </div>
+
+                <div class="animate-on-active delay-4">
+                    <div class="content-card" style="text-align: center; padding: 30px;">
+                        <div class="stat-number" style="color: var(--crimson); font-size: 5rem;">43</div>
+                        <p style="font-size: 1rem; margin-top: 8px;">yaşında öldürüldü</p>
+                    </div>
+
+                    <div class="quote-block" style="border-left-color: var(--crimson);">
+                        <p>Benna'nın ölümü İhvan'a vurulan <strong>ilk ve en ağır darbe</strong> olarak değerlendirilir.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>İhvan'ın Rolü</h3>
+                        <p>Bir <strong style="color: var(--gold-light);">medrese işlevi</strong> gördüğü söylenebilir; Suriye, Lübnan ve Filistin'deki İslami grupların çoğu Mısır İhvanı'ndan ortaya çıkmıştır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 5: MODERNLEŞMe VE NASIR
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="Modernleşme ve Nasır Dönemi">
+        <div class="slide-inner">
+            <span class="section-badge animate-on-active delay-1">🔄 Dönüşüm</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 16px;">Modernleşme ve Nasır Dönemi</h1>
+
+            <div class="two-col">
+                <div class="animate-on-active delay-3">
+                    <div class="content-card">
+                        <h3>Mehmet Ali Paşa (1798–1801)</h3>
+                        <p>Mısır'da modernleşmeyi ilk başlatan kişi. Ancak eğitimi geniş kitlelere yaymamış; reformlarını yalnızca <strong style="color: var(--gold-light);">devlete personel yetiştirmek</strong> amacıyla gerçekleştirmiştir.</p>
+                        <p style="margin-top: 8px;">Halkın, köylünün ve çocukların bilinçli olarak eğitimsiz bırakılmasına zemin hazırlamıştır.</p>
+                    </div>
+
+                    <div class="content-card" style="border-left: 3px solid var(--teal);">
+                        <h3 style="color: var(--teal);">Kritik Tespit</h3>
+                        <p>Fransız savunma teknolojisinden etkilenen Mehmet Ali Paşa'nın, bugün <strong style="color: var(--teal);">Mısır Ordusu'nun devlet üzerindeki tahakkümünün tohumlarını</strong> attığı söylenebilir.</p>
+                    </div>
+                </div>
+
+                <div class="animate-on-active delay-4">
+                    <div class="content-card" style="border-left: 3px solid var(--crimson);">
+                        <h3 style="color: var(--crimson-light);">Nasır Dönemi (1952–1970)</h3>
+                        <p>Krallık yönetimini askeri darbeyle deviren Nasır; laik Arap ulusçuluğu ekseninde politika izlemiştir.</p>
+                        <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                            <li style="padding: 6px 0; padding-left: 20px; position: relative; font-size: 0.88rem;">
+                                <span style="position: absolute; left: 0; color: var(--crimson-light);">▸</span>
+                                1956'da yetkileri tek elde topladı
+                            </li>
+                            <li style="padding: 6px 0; padding-left: 20px; position: relative; font-size: 0.88rem;">
+                                <span style="position: absolute; left: 0; color: var(--crimson-light);">▸</span>
+                                Ordunun devlet egemenliğini pekiştirdi
+                            </li>
+                            <li style="padding: 6px 0; padding-left: 20px; position: relative; font-size: 0.88rem;">
+                                <span style="position: absolute; left: 0; color: var(--crimson-light);">▸</span>
+                                Kur'an'ın eylemsel açıdan elverişli olmadığını savundu
+                            </li>
+                            <li style="padding: 6px 0; padding-left: 20px; position: relative; font-size: 0.88rem;">
+                                <span style="position: absolute; left: 0; color: var(--crimson-light);">▸</span>
+                                Ulema ile iş birliği yaparak İhvan'ı tasfiyeye girişti
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 6: İHVAN'A İKİNCİ DARBE
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="İhvan'a İkinci Büyük Darbe (1954)">
+        <div class="slide-inner">
+            <span class="section-badge red animate-on-active delay-1">💥 1954</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 16px;">İhvan'a İkinci Büyük Darbe</h1>
+            <p class="animate-on-active delay-3" style="max-width: 700px; margin-bottom: 24px;">
+                1954'te Nasır döneminde hareketin pek çok isminin tasfiye edilmesi, İhvan'a vurulan ikinci büyük darbedir. Seyyid Kutup'un idam edilmesiyle bu dönem son bulur.
+            </p>
+
+            <div class="animate-on-active delay-4">
+                <!-- SVG: Two strikes visualization -->
+                <svg viewBox="0 0 800 200" style="width: 100%; max-width: 800px; margin: 20px auto; display: block;">
+                    <!-- Line -->
+                    <line x1="50" y1="100" x2="750" y2="100" stroke="var(--gold-dim)" stroke-width="2" stroke-dasharray="6,4"/>
+                    
+                    <!-- Strike 1 -->
+                    <circle cx="250" cy="100" r="30" fill="none" stroke="var(--crimson)" stroke-width="2"/>
+                    <circle cx="250" cy="100" r="8" fill="var(--crimson)">
+                        <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <text x="250" y="60" fill="var(--crimson-light)" text-anchor="middle" font-family="JetBrains Mono" font-size="14" font-weight="600">1949</text>
+                    <text x="250" y="155" fill="var(--text-secondary)" text-anchor="middle" font-family="Source Sans 3" font-size="13">Benna Suikastı</text>
+
+                    <!-- Strike 2 -->
+                    <circle cx="550" cy="100" r="30" fill="none" stroke="var(--crimson)" stroke-width="2"/>
+                    <circle cx="550" cy="100" r="8" fill="var(--crimson)">
+                        <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+                        <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+                    </circle>
+                    <text x="550" y="60" fill="var(--crimson-light)" text-anchor="middle" font-family="JetBrains Mono" font-size="14" font-weight="600">1954–1966</text>
+                    <text x="550" y="155" fill="var(--text-secondary)" text-anchor="middle" font-family="Source Sans 3" font-size="13">Tasfiye + Kutup İdamı</text>
+
+                    <!-- Survival arrow -->
+                    <line x1="650" y1="100" x2="740" y2="100" stroke="var(--teal)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="var(--teal)"/>
+                        </marker>
+                    </defs>
+                    <text x="750" y="85" fill="var(--teal)" font-family="Source Sans 3" font-size="12" font-weight="600">Hayatta</text>
+                    <text x="750" y="115" fill="var(--teal)" font-family="Source Sans 3" font-size="12" font-weight="600">Kaldı</text>
+                </svg>
+            </div>
+
+            <div class="quote-block animate-on-active delay-5" style="border-left-color: var(--teal);">
+                <p>Her iki darbede de örgütün iki büyük isminin ölümüyle sonuçlanan bu süreç, <strong style="color: var(--teal);">hareketi yok edememiş; İhvan bugüne dek varlığını sürdürmüştür.</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 7: SEYYİD KUTUP
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="Seyyid Kutup: Düşünsel Lider">
+        <div class="slide-inner">
+            <span class="section-badge animate-on-active delay-1">📖 Düşünce</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 16px;">Seyyid Kutup<br><span style="font-size: 1.6rem; color: var(--text-secondary); font-weight: 400;">Düşünsel Lider ve Radikalizmin Fikir Babası</span></h1>
+
+            <div class="two-col" style="margin-top: 20px;">
+                <div class="animate-on-active delay-3">
+                    <img src="./prison-intellectual-resistance.png" alt="Kutup" class="slide-image" style="margin-top: 0; max-height: 180px;">
+
+                    <p style="margin-bottom: 16px;">
+                        1953'te harekete katılan Kutup, bir eğitimci ve ideolog olarak öne çıkmıştır. Benna ile çağdaş olmasına karşın ikisi <strong style="color: var(--gold-light);">hiç görüşmemiştir.</strong>
+                    </p>
+                    <p>
+                        Kutup başlangıçta Benna'yı ve hareketi <strong style="color: var(--gold-light);">gelenekselci olmakla</strong> eleştirmiştir. Ona göre İslam ancak <em>yaşanarak</em> ortaya çıkabilir.
+                    </p>
+                </div>
+
+                <div class="animate-on-active delay-4">
+                    <!-- Comparison: Benna vs Kutup -->
+                    <div class="comparison-card gold" style="margin-bottom: 16px;">
+                        <h3 style="color: var(--gold-light); margin-bottom: 10px;">🏛️ Hasan el-Benna</h3>
+                        <p>Kurucu lider ve önder</p>
+                        <p style="margin-top: 6px;"><strong style="color: var(--gold-light);">Karizmatik lider</strong></p>
+                        <p style="margin-top: 6px; font-size: 0.82rem; color: var(--text-dim);">Cahiliye kavramını hiç kullanmamıştır</p>
+                    </div>
+                    <div class="comparison-card red">
+                        <h3 style="color: var(--crimson-light); margin-bottom: 10px;">📕 Seyyid Kutup</h3>
+                        <p>Fikir babası ve eylemsel aktivist</p>
+                        <p style="margin-top: 6px;"><strong style="color: var(--crimson-light);">Düşünsel lider</strong></p>
+                        <p style="margin-top: 6px; font-size: 0.82rem; color: var(--text-dim);">Cahiliye kavramını ilk kullanan isim</p>
+                    </div>
+
+                    <div class="content-card" style="margin-top: 12px;">
+                        <h3>Eserleri</h3>
+                        <p><strong style="color: var(--crimson-light);">Yoldaki İşaretler</strong> — Rejim için açık tehdit</p>
+                        <p style="margin-top: 4px;"><strong style="color: var(--gold-light);">Fizilal'il-Kur'an</strong> — Hapiste kaleme aldı</p>
+                        <p style="margin-top: 8px; color: var(--crimson-light); font-weight: 600;">1966'da idam edildi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 8: CAHİLİYE KAVRAMI
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="Cahiliye Kavramı">
+        <div class="slide-inner" style="text-align: center;">
+            <span class="section-badge red animate-on-active delay-1">⚡ Kırılma Noktası</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 20px;">Cahiliye Kavramı</h1>
+            <p class="animate-on-active delay-3" style="max-width: 600px; margin: 0 auto 30px;">
+                Kutup'un en çarpıcı ve radikal katkısı: Allah'ın tevhidinden habersiz yaşayan toplumu nitelendirmek için <strong style="color: var(--crimson-light);">cahiliye</strong> kavramını kullanmasıdır.
+            </p>
+
+            <!-- SVG: Concept web -->
+            <div class="animate-on-active delay-4">
+                <svg viewBox="0 0 600 350" style="width: 100%; max-width: 600px; margin: 0 auto; display: block;">
+                    <!-- Central node -->
+                    <circle cx="300" cy="175" r="55" fill="rgba(160, 32, 32, 0.2)" stroke="var(--crimson)" stroke-width="2">
+                        <animate attributeName="r" values="55;60;55" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <text x="300" y="170" fill="var(--crimson-light)" text-anchor="middle" font-family="Playfair Display" font-size="18" font-weight="700">CAHİLİYE</text>
+                    <text x="300" y="192" fill="var(--text-dim)" text-anchor="middle" font-family="Source Sans 3" font-size="11">Toplumsal Cehalet</text>
+
+                    <!-- Branch nodes -->
+                    <!-- Top -->
+                    <line x1="300" y1="120" x2="300" y2="50" stroke="var(--gold-dim)" stroke-width="1" stroke-dasharray="4,3">
+                        <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+                    </line>
+                    <circle cx="300" cy="40" r="25" fill="rgba(212, 168, 67, 0.1)" stroke="var(--gold-dim)" stroke-width="1"/>
+                    <text x="300" y="44" fill="var(--gold-light)" text-anchor="middle" font-size="10" font-family="Source Sans 3">Tevhidden</text>
+                    <text x="300" y="56" fill="var(--gold-light)" text-anchor="middle" font-size="10" font-family="Source Sans 3">Habersizlik</text>
+
+                    <!-- Left -->
+                    <line x1="245" y1="175" x2="120" y2="120" stroke="var(--gold-dim)" stroke-width="1" stroke-dasharray="4,3">
+                        <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite" begin="0.3s"/>
+                    </line>
+                    <circle cx="100" cy="110" r="25" fill="rgba(212, 168, 67, 0.1)" stroke="var(--gold-dim)" stroke-width="1"/>
+                    <text x="100" y="107" fill="var(--gold-light)" text-anchor="middle" font-size="10" font-family="Source Sans 3">Toplumun</text>
+                    <text x="100" y="119" fill="var(--gold-light)" text-anchor="middle" font-size="10" font-family="Source Sans 3">Reddi</text>
+
+                    <!-- Right -->
+                    <line x1="355" y1="175" x2="480" y2="120" stroke="var(--gold-dim)" stroke-width="1" stroke-dasharray="4,3">
+                        <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite" begin="0.6s"/>
+                    </line>
+                    <circle cx="500" cy="110" r="25" fill="rgba(212, 168, 67, 0.1)" stroke="var(--gold-dim)" stroke-width="1"/>
+                    <text x="500" y="107" fill="var(--gold-light)" text-anchor="middle" font-size="10" font-family="Source Sans 3">Devletin</text>
+                    <text x="500" y="119" fill="var(--gold-light)" text-anchor="middle" font-size="10" font-family="Source Sans 3">Tekfiri</text>
+
+                    <!-- Bottom Left -->
+                    <line x1="260" y1="220" x2="150" y2="290" stroke="var(--crimson)" stroke-width="1" stroke-dasharray="4,3" opacity="0.6">
+                        <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite" begin="0.9s"/>
+                    </line>
+                    <circle cx="135" cy="300" r="25" fill="rgba(160, 32, 32, 0.1)" stroke="var(--crimson)" stroke-width="1" opacity="0.7"/>
+                    <text x="135" y="297" fill="var(--crimson-light)" text-anchor="middle" font-size="10" font-family="Source Sans 3">Silahlı</text>
+                    <text x="135" y="309" fill="var(--crimson-light)" text-anchor="middle" font-size="10" font-family="Source Sans 3">Eylem</text>
+
+                    <!-- Bottom Right -->
+                    <line x1="340" y1="220" x2="450" y2="290" stroke="var(--crimson)" stroke-width="1" stroke-dasharray="4,3" opacity="0.6">
+                        <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite" begin="1.2s"/>
+                    </line>
+                    <circle cx="465" cy="300" r="25" fill="rgba(160, 32, 32, 0.1)" stroke="var(--crimson)" stroke-width="1" opacity="0.7"/>
+                    <text x="465" y="297" fill="var(--crimson-light)" text-anchor="middle" font-size="10" font-family="Source Sans 3">Hicret</text>
+                    <text x="465" y="309" fill="var(--crimson-light)" text-anchor="middle" font-size="10" font-family="Source Sans 3">/ Kopuş</text>
+                </svg>
+            </div>
+
+            <div class="quote-block animate-on-active delay-5" style="max-width: 600px; margin: 20px auto; text-align: left;">
+                <p>Bu fark, iki ismin temsil ettiği iki farklı çizgiyi net biçimde ortaya koymaktadır. <strong>Benna bu kavramı hiç kullanmamıştır.</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 9: HUDAYBİ VE TEKFİR
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="Hudaybi ve Tekfir Tartışması">
+        <div class="slide-inner">
+            <span class="section-badge animate-on-active delay-1">🔀 Ayrışma</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 16px;">İhvan İçindeki Kırılma<br><span style="font-size: 1.4rem; color: var(--text-secondary); font-weight: 400;">Hudaybi ve Tekfir Tartışması</span></h1>
+
+            <img src="./split-path-divergence.png" alt="Ayrışma" class="slide-image animate-on-active delay-3" style="max-height: 200px;">
+
+            <div class="two-col animate-on-active delay-4">
+                <div class="comparison-card gold">
+                    <h3 style="color: var(--gold-light); margin-bottom: 12px;">📗 Hudaybi — Davetçiler</h3>
+                    <p style="font-style: italic; margin-bottom: 12px; color: var(--text-primary);">"Hüküm Verenler Değil, Davetçiler" (1969)</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 5px 0; padding-left: 16px; position: relative; font-size: 0.85rem;">
+                            <span style="position: absolute; left: 0; color: var(--gold);">◆</span>
+                            İhvan'ın görevi toplumu yargılamak değil
+                        </li>
+                        <li style="padding: 5px 0; padding-left: 16px; position: relative; font-size: 0.85rem;">
+                            <span style="position: absolute; left: 0; color: var(--gold);">◆</span>
+                            Şehadet getirene kâfir denemez
+                        </li>
+                        <li style="padding: 5px 0; padding-left: 16px; position: relative; font-size: 0.85rem;">
+                            <span style="position: absolute; left: 0; color: var(--gold);">◆</span>
+                            İhvan davetçidir, hâkim değil
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="comparison-card red">
+                    <h3 style="color: var(--crimson-light); margin-bottom: 12px;">📕 Radikal Kanat — Tekfirciler</h3>
+                    <p style="font-style: italic; margin-bottom: 12px; color: var(--text-primary);">Kutup'un teorisi somut bir isyan gerekçesine dönüştü</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 5px 0; padding-left: 16px; position: relative; font-size: 0.85rem;">
+                            <span style="position: absolute; left: 0; color: var(--crimson);">◆</span>
+                            İşkence uygulayan memurlar kâfir
+                        </li>
+                        <li style="padding: 5px 0; padding-left: 16px; position: relative; font-size: 0.85rem;">
+                            <span style="position: absolute; left: 0; color: var(--crimson);">◆</span>
+                            Emri veren yöneticiler kâfir
+                        </li>
+                        <li style="padding: 5px 0; padding-left: 16px; position: relative; font-size: 0.85rem;">
+                            <span style="position: absolute; left: 0; color: var(--crimson);">◆</span>
+                            Sessiz kalan halk kâfir
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="animate-on-active delay-5" style="margin-top: 16px; text-align: center; color: var(--text-dim); font-size: 0.88rem;">
+                Hareketi iki kanada ayıran bu tartışma <strong style="color: var(--text-secondary);">bugüne kadar devam ediyor.</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 10: SEDAT DÖNEMİ
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="Sedat Dönemi: Yeniden Canlanma">
+        <div class="slide-inner">
+            <span class="section-badge teal animate-on-active delay-1">🔄 1970–1981</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 16px;">Sedat Dönemi<br><span style="font-size: 1.4rem; color: var(--text-secondary); font-weight: 400;">Yeniden Canlanma ve Yeni Radikaller</span></h1>
+
+            <div class="two-col">
+                <div class="animate-on-active delay-3">
+                    <img src="./sadat-era-campus-rise.png" alt="Sedat Dönemi" class="slide-image" style="margin-top: 0; max-height: 180px;">
+
+                    <div class="content-card">
+                        <h3 style="color: var(--teal);">Sedat'ın Pragmatizmi</h3>
+                        <p>İhvan'ı Nasırcı ve sol rakiplerine karşı <strong style="color: var(--teal);">denge unsuru</strong> olarak kullandı. Kendisini "mümin başkan" olarak tanımladı. 1971 anayasasına şeriatı temel kaynak olarak ekledi.</p>
+                        <p style="margin-top: 8px; color: var(--gold-light); font-size: 0.85rem;">Bu sarılma samimi bir dönüşüm değil, siyasi bir araçtı.</p>
+                    </div>
+                </div>
+
+                <div class="animate-on-active delay-4">
+                    <div class="content-card" style="text-align: center; padding: 24px;">
+                        <p style="font-size: 0.85rem; margin-bottom: 8px;">Üniversite seçimleri</p>
+                        <div class="stat-number" style="color: var(--teal);">1975–79</div>
+                        <p style="margin-top: 8px;">İhvan ezici çoğunlukla kazandı</p>
+                    </div>
+
+                    <div class="content-card" style="border-left: 3px solid var(--crimson);">
+                        <h3 style="color: var(--crimson-light);">Şükrü Mustafa — Cemaat-el Müslimin</h3>
+                        <p>Kutup'tan bile daha uç bir yorum: mevcut toplumu bütünüyle reddederek ondan <strong style="color: var(--crimson-light);">fiziksel olarak ayrılmayı (hicret)</strong> savundu.</p>
+                        <p style="margin-top: 8px; font-size: 0.85rem;">Toplumla ilişkiyi kesmek, cahiliyeden kopmanın tek yolu olarak görüldü.</p>
+                    </div>
+
+                    <div class="quote-block" style="border-left-color: var(--gold);">
+                        <p>Gençliğin bu denli hızlı İslami harekete yönelmesi yalnızca ideolojik bir tercih değil; ekonomik çöküşün yarattığı boşluğun doldurulma biçimi olarak da okunabilir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 11: SEDAT SUİKASTI
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="Sedat Suikastı (1981)">
+        <div class="slide-inner">
+            <span class="section-badge red animate-on-active delay-1">🎯 6 Ekim 1981</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 16px;">Sedat Suikastı ve<br>Başarısız "Devrim"</h1>
+
+            <div class="two-col">
+                <div class="animate-on-active delay-3">
+                    <img src="./assassination-moment.png" alt="Suikast" class="slide-image" style="margin-top: 0; max-height: 200px;">
+
+                    <div class="content-card">
+                        <h3>Tanzim el-Cihad</h3>
+                        <p>Suikastı gerçekleştiren grup. Teorisyeni <strong style="color: var(--crimson-light);">Abdusselam Ferec</strong>, cihadı İslam'ın altıncı şartı olarak tanımladı.</p>
+                        <p style="margin-top: 8px; font-size: 0.85rem; color: var(--text-dim);">
+                            <em>El-Fariza el-Gaibe</em> (Gözardı Edilen Farz)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="animate-on-active delay-4">
+                    <div class="content-card" style="border-left: 3px solid var(--crimson); background: rgba(160, 32, 32, 0.05);">
+                        <h3 style="color: var(--crimson-light);">Neden Başarısız Oldu?</h3>
+                        <p style="margin-bottom: 12px;">Kepel'in tespiti: <strong style="color: var(--text-primary);">Suikast bir Müslüman ayaklanmasına dönüşemedi.</strong></p>
+                        <p>Sedat'ın öldürülmesi halkı harekete geçiremedi, devrim başlamadı.</p>
+                    </div>
+
+                    <div class="quote-block" style="border-left-color: var(--gold);">
+                        <p>Hareket bu kadar parçalanmış, bu kadar farklı yorum ve gruplar arasında bölünmüşken, insanların etrafında toplanabileceği <strong>ortak bir örgüt, ortak bir dil yoktu.</strong></p>
+                    </div>
+
+                    <div class="content-card">
+                        <p style="color: var(--gold-light); font-weight: 500;">
+                            Bir eylemi gerçekleştirmek başka, ona toplumsal anlam kazandırmak başkadır.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 12: ISLAHTAN RADİKALİZME — ÜÇ NEDEN
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="Islahtan Radikalizme: Üç Neden">
+        <div class="slide-inner">
+            <span class="section-badge animate-on-active delay-1">📊 Analiz</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 12px;">Islahtan Radikalizme</h1>
+            <p class="animate-on-active delay-3" style="max-width: 700px; margin-bottom: 24px;">
+                İhvan hiçbir zaman açık bir şiddet politikası benimsememiştir. Ancak zaman içinde ıslah etkinlikleri yerini radikalizme bırakmıştır.
+            </p>
+
+            <div class="animate-on-active delay-4">
+                <img src="./reform-to-radicalism-layers.png" alt="Radikalizme Gidiş" class="slide-image" style="max-height: 200px;">
+            </div>
+
+            <h3 class="animate-on-active delay-4" style="margin: 20px 0 16px; color: var(--gold-light);">
+                Erkilet Hoca'ya göre şiddet politikasına gidişin üç temel nedeni:
+            </h3>
+
+            <div class="animate-on-active delay-5">
+                <div class="cause-item">
+                    <div class="cause-number c1">1</div>
+                    <div>
+                        <h3 style="color: var(--gold-light); margin-bottom: 4px;">İdeolojik Neden</h3>
+                        <p>Mevcut sistemin İslami açıdan değerlendirilme biçiminden kaynaklanmaktadır.</p>
+                    </div>
+                </div>
+
+                <div class="cause-item">
+                    <div class="cause-number c2">2</div>
+                    <div>
+                        <h3 style="color: var(--crimson-light); margin-bottom: 4px;">Cezaevi Şiddeti</h3>
+                        <p>1965–1977 yılları arasındaki uzun cezaevi dönemlerinde yaşanan baskı ve şiddet.</p>
+                    </div>
+                </div>
+
+                <div class="cause-item">
+                    <div class="cause-number c3">3</div>
+                    <div>
+                        <h3 style="color: var(--teal); margin-bottom: 4px;">Demokratik Güvensizlik</h3>
+                        <p>Hareketin demokratik sisteme duyduğu derin güvensizlik.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 13: SONUÇ — KEPEL'İN TESPİTİ
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="Sonuç: Kepel'in Tespiti">
+        <div class="slide-inner" style="text-align: center;">
+            <span class="section-badge animate-on-active delay-1">🔍 Sonuç</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 24px;">Kepel'in Tespiti</h1>
+
+            <!-- SVG: Layered diagram -->
+            <div class="animate-on-active delay-3">
+                <svg viewBox="0 0 700 280" style="width: 100%; max-width: 700px; margin: 0 auto 30px; display: block;">
+                    <!-- Layer 4: Top - Radicalism -->
+                    <rect x="100" y="20" width="500" height="50" rx="8" fill="rgba(160, 32, 32, 0.15)" stroke="var(--crimson)" stroke-width="1.5"/>
+                    <text x="350" y="50" fill="var(--crimson-light)" text-anchor="middle" font-family="Source Sans 3" font-size="14" font-weight="600">Kuşak Çatışmaları</text>
+
+                    <!-- Layer 3 -->
+                    <rect x="80" y="80" width="540" height="50" rx="8" fill="rgba(212, 168, 67, 0.1)" stroke="var(--gold-dim)" stroke-width="1.5"/>
+                    <text x="350" y="110" fill="var(--gold-light)" text-anchor="middle" font-family="Source Sans 3" font-size="14" font-weight="600">Teolojik Anlaşmazlıklar</text>
+
+                    <!-- Layer 2 -->
+                    <rect x="60" y="140" width="580" height="50" rx="8" fill="rgba(42, 157, 143, 0.1)" stroke="var(--teal-dim)" stroke-width="1.5"/>
+                    <text x="350" y="170" fill="var(--teal)" text-anchor="middle" font-family="Source Sans 3" font-size="14" font-weight="600">Toplumsal Dönüşümler</text>
+
+                    <!-- Layer 1: Base -->
+                    <rect x="40" y="200" width="620" height="50" rx="8" fill="rgba(255, 255, 255, 0.04)" stroke="var(--text-dim)" stroke-width="1.5"/>
+                    <text x="350" y="230" fill="var(--text-secondary)" text-anchor="middle" font-family="Source Sans 3" font-size="14" font-weight="600">Devlet Baskısı</text>
+
+                    <!-- Connecting arrows -->
+                    <line x1="350" y1="250" x2="350" y2="70" stroke="var(--text-dim)" stroke-width="1" stroke-dasharray="4,3" opacity="0.4"/>
+                    <text x="680" y="145" fill="var(--text-dim)" font-family="Source Sans 3" font-size="11" transform="rotate(-90,680,145)">Çok Katmanlı Süreç</text>
+                </svg>
+            </div>
+
+            <div class="quote-block animate-on-active delay-4" style="max-width: 700px; margin: 0 auto; text-align: left; border-left-color: var(--teal);">
+                <p style="font-size: 1.05rem;">Mısır'daki İslami radikalizm <strong style="color: var(--text-primary);">tek tip bir köktencilik değildir.</strong> Devlet baskısı, teolojik anlaşmazlıklar, kuşak çatışmaları ve toplumsal dönüşümlerin iç içe geçtiği <strong style="color: var(--teal);">çok katmanlı ve rekabetçi bir süreçtir.</strong></p>
+                <div class="quote-source">— Gilles Kepel</div>
+            </div>
+
+            <p class="animate-on-active delay-5" style="margin-top: 20px; color: var(--gold-light); font-weight: 500;">
+                Bu tespit bugün için de geçerliliğini koruyor.
+            </p>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 14: İNFOGRAFİK — GENEL ÖZET
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="Genel Özet — İnfografik">
+        <div class="slide-inner" style="text-align: center;">
+            <span class="section-badge animate-on-active delay-1">📋 Genel Özet</span>
+            <h1 class="animate-on-active delay-2" style="margin-bottom: 8px;">Mısır'da İhvan-ı Müslimin</h1>
+            <p class="animate-on-active delay-2" style="color: var(--text-secondary); margin-bottom: 20px;">Islahattan Radikalizme — Tam Görünüm</p>
+
+            <div class="animate-on-active delay-3">
+                <img src="./ihvan-info.png" alt="İhvan-ı Müslimin İnfografik" 
+                     style="width: 100%; max-width: 1100px; border-radius: 16px; border: 1px solid var(--border-light); box-shadow: 0 8px 40px rgba(0,0,0,0.4);">
+            </div>
+
+            <p class="animate-on-active delay-4" style="margin-top: 16px; font-size: 0.8rem; color: var(--text-dim);">
+                Kaynak: NotebookLM tarafından oluşturulmuştur
+            </p>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SLIDE 15: KAPANIŞ
+    ══════════════════════════════════════════════════ -->
+    <div class="slide" data-title="Kapanış">
+        <div class="slide-inner" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: calc(100vh - 120px);">
+
+            <!-- Islamic pattern SVG -->
+            <svg class="animate-on-active delay-1" viewBox="0 0 120 120" style="width: 80px; height: 80px; margin-bottom: 30px; opacity: 0.6;">
+                <polygon points="60,5 95,30 95,70 60,95 25,70 25,30" fill="none" stroke="var(--gold)" stroke-width="1.5">
+                    <animate attributeName="stroke-dasharray" values="0,400;400,0" dur="3s" fill="freeze"/>
+                </polygon>
+                <polygon points="60,20 80,35 80,65 60,80 40,65 40,35" fill="none" stroke="var(--gold-dim)" stroke-width="1">
+                    <animate attributeName="stroke-dasharray" values="0,300;300,0" dur="3s" begin="0.5s" fill="freeze"/>
+                </polygon>
+                <circle cx="60" cy="50" r="8" fill="var(--gold)" opacity="0.3">
+                    <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+
+            <h1 class="animate-on-active delay-2" style="font-size: 2.5rem; margin-bottom: 16px;">
+                <span style="background: linear-gradient(135deg, #5CB88A, #2C8C6C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Teşekkürler</span>
+            </h1>
+
+            <div class="cover-divider animate-on-active delay-3"></div>
+
+            <p class="animate-on-active delay-3" style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 30px;">
+                Sorular ve Tartışma
+            </p>
+
+            <div class="animate-on-active delay-4" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                <div class="content-card" style="padding: 16px 24px; text-align: center;">
+                    <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 4px;">Kaynak</p>
+                    <p style="font-size: 0.9rem; color: var(--gold-light);">Gilles Kepel & Erkilet Hoca</p>
+                </div>
+                <div class="content-card" style="padding: 16px 24px; text-align: center;">
+                    <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 4px;">Dönem</p>
+                    <p style="font-size: 0.9rem; color: var(--gold-light);">1928 – 1981</p>
+                </div>
+                <div class="content-card" style="padding: 16px 24px; text-align: center;">
+                    <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 4px;">Konu</p>
+                    <p style="font-size: 0.9rem; color: var(--gold-light);">İhvan-ı Müslimin</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     NAVIGATION BAR
+══════════════════════════════════════════════════ -->
+<div class="nav-bar">
+    <div class="nav-info">
+        <span class="nav-title" id="slideTitle">Kapak</span>
+    </div>
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="prevSlide()" title="Önceki (←)">←</button>
+        <span class="slide-counter" id="slideCounter">1 / 15</span>
+        <button class="nav-btn" onclick="nextSlide()" title="Sonraki (→)">→</button>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════ -->
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        if (index < 0 || index >= totalSlides) return;
+
+        const prev = currentSlide;
+        currentSlide = index;
+
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active', 'prev');
+            if (i === currentSlide) {
+                slide.classList.add('active');
+            } else if (i === prev && prev < currentSlide) {
+                slide.classList.add('prev');
+            }
+        });
+
+        // Update counter
+        document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+        // Update title
+        const title = slides[currentSlide].getAttribute('data-title') || '';
+        document.getElementById('slideTitle').textContent = title;
+
+        // Update progress bar
+        const progress = ((currentSlide) / (totalSlides - 1)) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    function nextSlide() { showSlide(currentSlide + 1); }
+    function prevSlide() { showSlide(currentSlide - 1); }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+        if (e.key === 'Home') { e.preventDefault(); showSlide(0); }
+        if (e.key === 'End') { e.preventDefault(); showSlide(totalSlides - 1); }
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+    document.addEventListener('touchend', (e) => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) nextSlide();
+            else prevSlide();
+        }
+    });
+
+    // Expandable sections
+    function toggleExpand(el) {
+        const content = el.nextElementSibling;
+        el.classList.toggle('open');
+        content.classList.toggle('open');
+    }
+
+    // Initialize
+    showSlide(0);
+</script>
+
+</body>
+</html>
